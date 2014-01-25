@@ -16,10 +16,10 @@ public class RegisterHit : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.gameObject.tag == "ArmCollider"){
-			mainController.TriggerHit(other, 1);
+			mainController.TriggerHit(other, 10);
 		}
 		else if(other.gameObject.tag == "LegCollider"){
-			mainController.TriggerHit(other, 2);
+			mainController.TriggerHit(other, 20);
 		}
 	}
 }

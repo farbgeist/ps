@@ -13,6 +13,9 @@ public class ControlPlayer : MonoBehaviour {
 	public string fire1 = "Fire1";
 	public string fire2 = "Fire2";
 
+	public float playerHealth = 100f;
+	public SpriteRenderer healthbar;
+	public SpriteRenderer lasthealth;
 
 
 	public float attackspeed = 5f;
@@ -32,6 +35,8 @@ public class ControlPlayer : MonoBehaviour {
 	private GameObject legobject;
 
 	private Animator anim;					// Reference to the player's animator component.
+
+	private bool isdead = false;
 
 	void Awake()
 	{
@@ -81,99 +86,114 @@ public class ControlPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
+		if(!isdead){
+			// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
+			grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
 
-		float v = Input.GetAxis(verAxis);
+			float v = Input.GetAxis(verAxis);
 
-		if(Input.GetButtonDown(fire1) && Time.time > nextFire){	//Normal Attack
-			nextFire = Time.time + attackspeed;
-			anim.SetTrigger("normalpunch");
-		}
-		else if(Input.GetButtonDown(fire2) && Time.time > nextFire){	//Heavy Attack
-			nextFire = Time.time + attackspeed;
-			anim.SetTrigger("heavykick");
+			if(Input.GetButtonDown(fire1) && Time.time > nextFire){	//Normal Attack
+				nextFire = Time.time + attackspeed;
+				anim.SetTrigger("normalpunch");
+			}
+			else if(Input.GetButtonDown(fire2) && Time.time > nextFire){	//Heavy Attack
+				nextFire = Time.time + attackspeed;
+				anim.SetTrigger("heavykick");
+			}	
+			//Jumping
+			if (v > 0 && grounded){
+					jump = true;
+			}
+			else if (v < 0){
+				anim.SetBool("crouching", true);
+				iscrouching = true;
+			}
+			else{
+				anim.SetBool("crouching", false);
+				iscrouching = false;
+			}
 		}	
-		//Jumping
-		if (v > 0 && grounded){
-				jump = true;
-		}
-		else if (v < 0){
-			anim.SetBool("crouching", true);
-			iscrouching = true;
-		}
-		else{
-			anim.SetBool("crouching", false);
-			iscrouching = false;
-		}
 	}
 
 	void FixedUpdate(){
-		float h = 0;
-		if(!iscrouching){
-			// Cache the horizontal input.
-			h = Input.GetAxis(horAxis);
+		if(!isdead){
+			float h = 0;
+			if(!iscrouching){
+				// Cache the horizontal input.
+				h = Input.GetAxis(horAxis);
 
-			// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
-			if(h * rigidbody2D.velocity.x < maxSpeed)
-				// ... add a force to the player.
-				rigidbody2D.AddForce(Vector2.right * h * moveForce);
-		}
-		// If the player's horizontal velocity is greater than the maxSpeed...
-		if(Mathf.Abs(rigidbody2D.velocity.x) > maxSpeed)
-			// ... set the player's velocity to the maxSpeed in the x axis.
-			rigidbody2D.velocity = new Vector2(Mathf.Sign(rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
+				// If the player is changing direction (h has a different sign to velocity.x) or hasn't reached maxSpeed yet...
+				if(h * rigidbody2D.velocity.x < maxSpeed)
+					// ... add a force to the player.
+					rigidbody2D.AddForce(Vector2.right * h * moveForce);
+			}
+			// If the player's horizontal velocity is greater than the maxSpeed...
+			if(Mathf.Abs(rigidbody2D.velocity.x) > maxSpeed)
+				// ... set the player's velocity to the maxSpeed in the x axis.
+				rigidbody2D.velocity = new Vector2(Mathf.Sign(rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
 
-		// If the input is moving the player right and the player is facing left...
-		if(h > 0 && !facingRight)
-			// ... flip the player.
-			Flip();
-		// Otherwise if the input is moving the player left and the player is facing right...
-		else if(h < 0 && facingRight)
-			// ... flip the player.
-			Flip();
+			// If the input is moving the player right and the player is facing left...
+			if(h > 0 && !facingRight)
+				// ... flip the player.
+				Flip();
+			// Otherwise if the input is moving the player left and the player is facing right...
+			else if(h < 0 && facingRight)
+				// ... flip the player.
+				Flip();
 
 
-		if(jump)
-		{
-			// Add a vertical force to the player.
-			rigidbody2D.AddForce(new Vector2(0f, jumpForce));
+			if(jump)
+			{
+				// Add a vertical force to the player.
+				rigidbody2D.AddForce(new Vector2(0f, jumpForce));
 
-			// Make sure the player can't jump again until the jump conditions from Update are satisfied.
-			jump = false;
+				// Make sure the player can't jump again until the jump conditions from Update are satisfied.
+				jump = false;
+			}
 		}
 	}
 
 	void Flip ()
 	{
-		// Switch the way the player is labelled as facing.
-		facingRight = !facingRight;
+		if(!isdead){
+			// Switch the way the player is labelled as facing.
+			facingRight = !facingRight;
 
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
-	}
-
-	void OnTriggerEnter2D(Collider2D other){
-		Debug.Log("object entered");
-		Debug.Log(other.tag);
-		//TODO: Enter code for life handling here
+			// Multiply the player's x local scale by -1.
+			Vector3 theScale = transform.localScale;
+			theScale.x *= -1;
+			transform.localScale = theScale;
+		}
 	}
 
 	void TriggerPunch(){
-		punching = !punching;
-		armobject.collider2D.enabled = punching;
+		if(!isdead){
+			punching = !punching;
+			armobject.collider2D.enabled = punching;
+		}
 	}
 
 	void TriggerKick(){
-		kicking = !kicking;
-		legobject.collider2D.enabled = kicking;
+		if(!isdead){
+			kicking = !kicking;
+			legobject.collider2D.enabled = kicking;
+		}
 	}
 
 	//Trigger a hit through collider other with the damage amount amt
 	public void TriggerHit(Collider2D other, float amt){
-		Debug.Log("iscalled with dem damages "+ amt);
-		anim.SetTrigger("death");
+		if(!isdead){
+			Debug.Log("iscalled with dem damages "+ amt);
+			playerHealth -= amt;
+			if(playerHealth < 0) playerHealth = 0;
+
+			if(playerHealth <= 0 && !isdead){
+				isdead = true;
+				anim.SetTrigger("death");
+				lasthealth.enabled = false;
+			}
+
+			healthbar.gameObject.transform.localScale = new Vector3(playerHealth / 100, 1, 1);// = playerHealth / 100;
+		}
 	}
 }

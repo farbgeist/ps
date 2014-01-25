@@ -17,6 +17,11 @@ public class CycleCharacters : MonoBehaviour {
 	public string confirm1;
 	public string confirm2;
 
+	public SpriteRenderer leftbar;
+	public SpriteRenderer rightbar;
+	public SpriteRenderer leftlast;
+	public SpriteRenderer rightlast;
+
 	private GameObject left;
 	private GameObject right;
 	private int lindex = 0;
@@ -27,6 +32,8 @@ public class CycleCharacters : MonoBehaviour {
 
 	private bool p1_ready = false;
 	private bool p2_ready = false;
+
+	public SpriteRenderer[] activaterenderers;
 
 	// Use this for initialization
 	void Start () {
@@ -97,8 +104,19 @@ public class CycleCharacters : MonoBehaviour {
 			//Destroy(leftspawn);
 			//Destroy(rightspawn);
 
-			Instantiate(characters[lindex], leftspawn.position, leftspawn.rotation);
-			Instantiate(characters[rindex], rightspawn.position, rightspawn.rotation);
+			GameObject go = Instantiate(characters[lindex], leftspawn.position, leftspawn.rotation) as GameObject;
+			ControlPlayer[] cp = go.GetComponentsInChildren<ControlPlayer>();
+			cp[0].healthbar = leftbar;
+			cp[0].lasthealth = leftlast;
+
+			go = Instantiate(characters[rindex], rightspawn.position, rightspawn.rotation) as GameObject;
+			cp = go.GetComponentsInChildren<ControlPlayer>();
+			cp[0].healthbar = rightbar;
+			cp[0].lasthealth = rightlast;
+
+			foreach(SpriteRenderer sr in activaterenderers){
+				sr.enabled = true;
+			}
 		}
 	}
 }
