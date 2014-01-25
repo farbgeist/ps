@@ -186,13 +186,17 @@ public class ControlPlayer : MonoBehaviour {
 			Debug.Log("iscalled with dem damages "+ amt);
 			playerHealth -= amt;
 			if(playerHealth < 0) playerHealth = 0;
-
+			
 			if(playerHealth <= 0 && !isdead){
 				isdead = true;
 				anim.SetTrigger("death");
 				lasthealth.enabled = false;
+				GameObject hitSound = GameObject.Find("uff01");
+				hitSound.audio.Play();
+			}else{ // hit but not dead
+				GameObject hitSound = GameObject.Find("hit01");
+				hitSound.audio.Play();
 			}
-
 			healthbar.gameObject.transform.localScale = new Vector3(playerHealth / 100, 1, 1);// = playerHealth / 100;
 		}
 	}
