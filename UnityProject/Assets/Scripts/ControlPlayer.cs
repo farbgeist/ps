@@ -174,5 +174,6 @@ public class ControlPlayer : MonoBehaviour {
 	//Trigger a hit through collider other with the damage amount amt
 	public void TriggerHit(Collider2D other, float amt){
 		Debug.Log("iscalled with dem damages "+ amt);
+		anim.SetTrigger("death");
 	}
 }
