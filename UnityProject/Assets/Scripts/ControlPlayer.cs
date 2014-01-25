@@ -50,11 +50,15 @@ public class ControlPlayer : MonoBehaviour {
 			}
 		}
 
+		RegisterHit[] rh = gameObject.GetComponentsInChildren<RegisterHit>();
+		rh[0].mainController = this;
+
 		anim = GetComponent<Animator>();
 	}
 
 	// Use this for initialization
 	void Start () {
+		//set left/right differences
 		if(transform.position.x <= 0){
 			horAxis = "Horizontal";
 			verAxis = "Vertical";
@@ -79,8 +83,6 @@ public class ControlPlayer : MonoBehaviour {
 	{
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
 		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
-		//anim.SetBool("isgrounded", grounded);
-
 
 		float v = Input.GetAxis(verAxis);
 
@@ -162,32 +164,15 @@ public class ControlPlayer : MonoBehaviour {
 	void TriggerPunch(){
 		punching = !punching;
 		armobject.collider2D.enabled = punching;
-
-		/*Transform[] allChildren = gameObject.GetComponentsInChildren<Transform>();
- 
-		foreach (Transform child in allChildren)
-		{
-			if (child.gameObject.tag == "ArmCollider"){
-				child.gameObject.collider2D.enabled = punching;
-				Debug.Log("object found");
-				break;
-			}
-		}*/
 	}
 
 	void TriggerKick(){
 		kicking = !kicking;
 		legobject.collider2D.enabled = kicking;
+	}
 
-		/*Transform[] allChildren = gameObject.GetComponentsInChildren<Transform>();
- 
-		foreach (Transform child in allChildren)
-		{
-			if (child.gameObject.tag == "LegCollider"){
-				child.gameObject.collider2D.enabled = kicking;
-				Debug.Log("object found");
-				break;
-			}
-		}*/
+	//Trigger a hit through collider other with the damage amount amt
+	public void TriggerHit(Collider2D other, float amt){
+		Debug.Log("iscalled with dem damages "+ amt);
 	}
 }
