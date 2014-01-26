@@ -5932,7 +5932,7 @@ AnimationClip:
         value: {x: -6.83182526, y: -6.48999977, z: -5.79903221}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 4
+        tangentMode: 33558528
       - time: 8.46666622
         value: {x: -6.83182526, y: -6.48999977, z: -5.79903221}
         inSlope: {x: 0, y: 0, z: 0}
@@ -5942,7 +5942,7 @@ AnimationClip:
         value: {x: -6.83182526, y: -6.48999977, z: -5.79903221}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 3145776
+        tangentMode: 768
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: 
@@ -5958,17 +5958,17 @@ AnimationClip:
         value: {x: 2.6099999, y: 8.14999962, z: 0}
         inSlope: {x: -.636876106, y: .320001602, z: 0}
         outSlope: {x: -.636876106, y: .320001602, z: 0}
-        tangentMode: 0
+        tangentMode: 1
       - time: 8.46666622
         value: {x: 2.27999997, y: 8.31000042, z: 0}
         inSlope: {x: -.659999847, y: .320001602, z: 0}
         outSlope: {x: -.659999847, y: .320001602, z: 0}
-        tangentMode: -1082130432
+        tangentMode: 0
       - time: 8.63333321
         value: {x: 2.27999997, y: 8.31000042, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 647087572
+        tangentMode: 53
       - time: 8.94999981
         value: {x: 2.27999997, y: 8.31000042, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
@@ -5978,7 +5978,7 @@ AnimationClip:
         value: {x: 2.27999997, y: 8.31000042, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
-        tangentMode: 3801143
+        tangentMode: 20382
       m_PreInfinity: 2
       m_PostInfinity: 2
     path: platon
@@ -6026,7 +6026,7 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 7.73333311
+      - time: 7.2166667
         value: 1
         inSlope: Infinity
         outSlope: Infinity
@@ -29969,7 +29969,7 @@ AnimationClip:
         inSlope: Infinity
         outSlope: Infinity
         tangentMode: 31
-      - time: 7.73333311
+      - time: 7.2166667
         value: 1
         inSlope: Infinity
         outSlope: Infinity
