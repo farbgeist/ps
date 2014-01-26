@@ -133,6 +133,9 @@ public class ControlPlayer : MonoBehaviour {
 				// ... set the player's velocity to the maxSpeed in the x axis.
 				rigidbody2D.velocity = new Vector2(Mathf.Sign(rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
 
+			//adapt animation
+			anim.SetFloat("speed", Mathf.Abs(rigidbody2D.velocity.x));
+
 			// If the input is moving the player right and the player is facing left...
 			if(h > 0 && !facingRight)
 				// ... flip the player.
