@@ -114,6 +114,9 @@ public class ControlPlayer : MonoBehaviour {
 				iscrouching = false;
 			}
 		}	
+		else if(Input.anyKey){
+			Application.LoadLevel(Application.loadedLevel);
+		}
 	}
 
 	void FixedUpdate(){
