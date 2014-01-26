@@ -459,7 +459,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100028}
-  m_Mass: 1
+  m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1
@@ -588,8 +588,11 @@ MonoBehaviour:
   verAxis: Vertical
   fire1: Fire1
   fire2: Fire2
+  playerHealth: 100
+  healthbar: {fileID: 0}
+  lasthealth: {fileID: 0}
   attackspeed: .600000024
-  jumpForce: 200
+  jumpForce: 400
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

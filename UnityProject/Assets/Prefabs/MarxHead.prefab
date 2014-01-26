@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400000}
   - 212: {fileID: 21200000}
+  - 95: {fileID: 9500000}
   m_Layer: 0
   m_Name: Marx_Head
   m_TagString: Untagged
@@ -54,6 +55,20 @@ Transform:
   m_Children:
   - {fileID: 400000}
   m_Father: {fileID: 0}
+--- !u!95 &9500000
+Animator:
+  serializedVersion: 2
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6129ac5cc88150e438b260bcf1a1bc18, type: 2}
+  m_CullingMode: 0
+  m_ApplyRootMotion: 1
+  m_AnimatePhysics: 0
+  m_HasTransformHierarchy: 1
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1

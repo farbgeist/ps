@@ -92,9 +92,20 @@ public class CycleCharacters : MonoBehaviour {
 		lasta2 = a2;
 
 		if(Input.GetButton(confirm1)){
+			if(!p1_ready){
+				Animator[] tmpobj = left.gameObject.GetComponentsInChildren<Animator>();
+				tmpobj[0].SetTrigger("selected");
+
+				//left.gameObject.GetComponent<GameObject>().GetComponent<Animator>().SetTrigger("selected");
+			}
 			p1_ready = true;
 		}
 		if(Input.GetButton(confirm2)){
+			if(!p2_ready){
+				Animator[] tmpobj = right.gameObject.GetComponentsInChildren<Animator>();
+				tmpobj[0].SetTrigger("selected");
+				//right.gameObject.GetComponent<GameObject>().GetComponent<Animator>().SetTrigger("selected");
+			}
 			p2_ready = true;
 		}
 
