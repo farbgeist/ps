@@ -38,6 +38,9 @@ public class ControlPlayer : MonoBehaviour {
 
 	private bool isdead = false;
 
+	public AudioSource mainbgm;
+	public GameObject winning;
+
 	void Awake()
 	{
 		// Setting up references.
@@ -200,6 +203,9 @@ public class ControlPlayer : MonoBehaviour {
 				lasthealth.enabled = false;
 				GameObject hitSound = GameObject.Find("uff01");
 				hitSound.audio.Play();
+				mainbgm.Stop();
+				Instantiate(winning, new Vector3(0, 0, -7), transform.rotation);
+
 			}else{ // hit but not dead
 				GameObject hitSound = GameObject.Find("hit01");
 				hitSound.audio.Play();
