@@ -95,6 +95,7 @@ public class ControlPlayer : MonoBehaviour {
 			if(Input.GetButtonDown(fire1) && Time.time > nextFire){	//Normal Attack
 				nextFire = Time.time + attackspeed;
 				anim.SetTrigger("normalpunch");
+				Debug.Log("trigger punch");
 			}
 			else if(Input.GetButtonDown(fire2) && Time.time > nextFire){	//Heavy Attack
 				nextFire = Time.time + attackspeed;
@@ -113,6 +114,9 @@ public class ControlPlayer : MonoBehaviour {
 				iscrouching = false;
 			}
 		}	
+		else if(Input.anyKey){
+			Application.LoadLevel(Application.loadedLevel);
+		}
 	}
 
 	void FixedUpdate(){
@@ -131,6 +135,9 @@ public class ControlPlayer : MonoBehaviour {
 			if(Mathf.Abs(rigidbody2D.velocity.x) > maxSpeed)
 				// ... set the player's velocity to the maxSpeed in the x axis.
 				rigidbody2D.velocity = new Vector2(Mathf.Sign(rigidbody2D.velocity.x) * maxSpeed, rigidbody2D.velocity.y);
+
+			//adapt animation
+			anim.SetFloat("speed", Mathf.Abs(rigidbody2D.velocity.x));
 
 			// If the input is moving the player right and the player is facing left...
 			if(h > 0 && !facingRight)
