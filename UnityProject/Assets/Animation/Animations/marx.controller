@@ -24,7 +24,7 @@ AnimatorController:
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
-    m_DefaultBool: 1
+    m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: death
     m_Type: 9
@@ -52,7 +52,7 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110235004}
   m_DstState: {fileID: 110200000}
-  m_TransitionDuration: .25
+  m_TransitionDuration: .000584341411
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
@@ -160,7 +160,7 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110235004}
   m_DstState: {fileID: 110269984}
-  m_TransitionDuration: .25
+  m_TransitionDuration: .000584341411
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
@@ -196,7 +196,7 @@ Transition:
   m_Name: 
   m_SrcState: {fileID: 110235004}
   m_DstState: {fileID: 110251272}
-  m_TransitionDuration: .25
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
@@ -212,7 +212,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: marx_punch
-  m_Speed: 2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: 01d65a64cc364964298e71379e60b5e6, type: 2}
@@ -272,7 +272,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: marx_kick
-  m_Speed: 2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: 8ae9827163463d946bf91f8abb8a4b19, type: 2}

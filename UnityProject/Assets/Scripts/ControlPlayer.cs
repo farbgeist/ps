@@ -95,6 +95,7 @@ public class ControlPlayer : MonoBehaviour {
 			if(Input.GetButtonDown(fire1) && Time.time > nextFire){	//Normal Attack
 				nextFire = Time.time + attackspeed;
 				anim.SetTrigger("normalpunch");
+				Debug.Log("trigger punch");
 			}
 			else if(Input.GetButtonDown(fire2) && Time.time > nextFire){	//Heavy Attack
 				nextFire = Time.time + attackspeed;
