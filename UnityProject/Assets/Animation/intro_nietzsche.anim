@@ -13385,7 +13385,7 @@ AnimationClip:
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: 16.2000008
+    m_StopTime: 16.2333336
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -66965,4 +66965,11 @@ AnimationClip:
     path: Marx_Head
     classID: 4
     script: {fileID: 0}
-  m_Events: []
+  m_Events:
+  - time: 16.2333336
+    functionName: nextRoom
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
