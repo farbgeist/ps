@@ -36,10 +36,14 @@ public class ControlPlayer : MonoBehaviour {
 
 	private Animator anim;					// Reference to the player's animator component.
 
-	private bool isdead = false;
+	public bool isdead = false;
 
 	public AudioSource mainbgm;
 	public GameObject winning;
+
+	private float waittime;
+
+	public ControlPlayer otherPlayer;
 
 	void Awake()
 	{
@@ -89,7 +93,7 @@ public class ControlPlayer : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		if(!isdead){
+		if(!isdead && !otherPlayer.isdead){
 			// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
 			grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
 
@@ -117,13 +121,13 @@ public class ControlPlayer : MonoBehaviour {
 				iscrouching = false;
 			}
 		}	
-		else if(Input.anyKey){
+		else if(Input.anyKey && Time.time > waittime){
 			Application.LoadLevel(Application.loadedLevel);
 		}
 	}
 
 	void FixedUpdate(){
-		if(!isdead){
+		if(!isdead && !otherPlayer.isdead){
 			float h = 0;
 			if(!iscrouching){
 				// Cache the horizontal input.
@@ -165,7 +169,7 @@ public class ControlPlayer : MonoBehaviour {
 
 	void Flip ()
 	{
-		if(!isdead){
+		if(!isdead && !otherPlayer.isdead){
 			// Switch the way the player is labelled as facing.
 			facingRight = !facingRight;
 
@@ -177,14 +181,14 @@ public class ControlPlayer : MonoBehaviour {
 	}
 
 	void TriggerPunch(){
-		if(!isdead){
+		if(!isdead && !otherPlayer.isdead){
 			punching = !punching;
 			armobject.collider2D.enabled = punching;
 		}
 	}
 
 	void TriggerKick(){
-		if(!isdead){
+		if(!isdead && !otherPlayer.isdead){
 			kicking = !kicking;
 			legobject.collider2D.enabled = kicking;
 		}
@@ -192,7 +196,7 @@ public class ControlPlayer : MonoBehaviour {
 
 	//Trigger a hit through collider other with the damage amount amt
 	public void TriggerHit(Collider2D other, float amt){
-		if(!isdead){
+		if(!isdead && !otherPlayer.isdead){
 			Debug.Log("iscalled with dem damages "+ amt);
 			playerHealth -= amt;
 			if(playerHealth < 0) playerHealth = 0;
@@ -205,6 +209,7 @@ public class ControlPlayer : MonoBehaviour {
 				hitSound.audio.Play();
 				mainbgm.Stop();
 				Instantiate(winning, new Vector3(0, 0, -7), transform.rotation);
+				waittime = Time.time + 2f;
 
 			}else{ // hit but not dead
 				GameObject hitSound = GameObject.Find("hit01");

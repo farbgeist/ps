@@ -134,18 +134,21 @@ public class CycleCharacters : MonoBehaviour {
 					//Destroy(rightspawn);
 
 					GameObject go = Instantiate(characters[lindex], leftspawn.position, leftspawn.rotation) as GameObject;
-					ControlPlayer[] cp = go.GetComponentsInChildren<ControlPlayer>();
-					cp[0].healthbar = leftbar;
-					cp[0].lasthealth = leftlast;
-					cp[0].mainbgm = game;
-					cp[0].winning = winnings[rindex];
+					ControlPlayer[] cp1 = go.GetComponentsInChildren<ControlPlayer>();
+					cp1[0].healthbar = leftbar;
+					cp1[0].lasthealth = leftlast;
+					cp1[0].mainbgm = game;
+					cp1[0].winning = winnings[rindex];
 
 					go = Instantiate(characters[rindex], rightspawn.position, rightspawn.rotation) as GameObject;
-					cp = go.GetComponentsInChildren<ControlPlayer>();
-					cp[0].healthbar = rightbar;
-					cp[0].lasthealth = rightlast;
-					cp[0].mainbgm = game;
-					cp[0].winning = winnings[lindex];
+					ControlPlayer[] cp2 = go.GetComponentsInChildren<ControlPlayer>();
+					cp2[0].healthbar = rightbar;
+					cp2[0].lasthealth = rightlast;
+					cp2[0].mainbgm = game;
+					cp2[0].winning = winnings[lindex];
+
+					cp1[0].otherPlayer = cp2[0];
+					cp2[0].otherPlayer = cp1[0];
 
 					foreach(SpriteRenderer sr in activaterenderers){
 						sr.enabled = true;

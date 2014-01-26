@@ -462,7 +462,7 @@ Rigidbody2D:
   m_Mass: 2
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
-  m_GravityScale: 1
+  m_GravityScale: 1.5
   m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -592,7 +592,11 @@ MonoBehaviour:
   healthbar: {fileID: 0}
   lasthealth: {fileID: 0}
   attackspeed: .600000024
-  jumpForce: 400
+  jumpForce: 800
+  isdead: 0
+  mainbgm: {fileID: 0}
+  winning: {fileID: 0}
+  otherPlayer: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
