@@ -22,6 +22,9 @@ public class CycleCharacters : MonoBehaviour {
 	public SpriteRenderer leftlast;
 	public SpriteRenderer rightlast;
 
+	public AudioSource intro;
+	public AudioSource game;
+
 	private GameObject left;
 	private GameObject right;
 	private int lindex = 0;
@@ -117,6 +120,9 @@ public class CycleCharacters : MonoBehaviour {
 			foreach(SpriteRenderer sr in activaterenderers){
 				sr.enabled = true;
 			}
+
+			intro.Stop();
+			game.Play();
 		}
 	}
 }
